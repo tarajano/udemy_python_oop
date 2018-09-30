@@ -9,37 +9,33 @@ possible congflicts.
 Here I will create a multiple inheritance situation to test.
 """ 
 
-class Specie(object):
-    def iam(self):
-        return Specie.__name__
+class GrandGrandParent(object):
+    @classmethod # Class method Decorator
+    def iam(cls):
+        return cls.__name__
     
-    def get_origin(self):
+    def get_origin(cls):
         return 'African'
 
-    def get_specie(self):
+    @staticmethod # Static is used for 'utility'  methods
+    def get_specie(cls):
         return 'Human'
 
 
-class ParentA(Specie):
-    def iam(self):
-        return ParentA.__name__
+class ParentA(GrandGrandParent):
     
     def get_origin(self):
         return 'European' 
         
 
-class ParentB(Specie):
-    def iam(self):
-        return ParentB.__name__
+class ParentB(GrandGrandParent):
 
     def get_origin(self):
         return 'Arabic' 
 
 
-
 class Child(ParentA, ParentB):
-    def iam(self):
-        return Child.__name__
+    pass
 
 
 c = Child()
@@ -48,3 +44,5 @@ print(c.get_origin())
 print(c.get_specie())
 print(Child.mro())
 
+
+# TODO .. INVESTIGATE DIFFERENCE BETWEEN @CLASSMETHOD AND @STATICMETHOD decorators
