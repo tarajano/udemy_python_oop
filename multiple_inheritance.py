@@ -14,11 +14,12 @@ class GrandGrandParent(object):
     def iam(cls):
         return cls.__name__
     
+    @classmethod
     def get_origin(cls):
         return 'African'
 
     @staticmethod # Static is used for 'utility'  methods
-    def get_specie(cls):
+    def get_specie():
         return 'Human'
 
 
@@ -44,5 +45,3 @@ print(c.get_origin())
 print(c.get_specie())
 print(Child.mro())
 
-
-# TODO .. INVESTIGATE DIFFERENCE BETWEEN @CLASSMETHOD AND @STATICMETHOD decorators
