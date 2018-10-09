@@ -30,10 +30,6 @@ class GrandGrandParent(object):
     def get_origin(cls):
         return 'African'
 
-    @staticmethod # Static is used for 'utility'  methods
-    def get_specie():
-        return 'Human'
-
 class ParentA(GrandGrandParent):
     def __init__(self, value = None):
         if not value:
