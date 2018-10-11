@@ -1,7 +1,7 @@
 import datetime
+from abc import ABC
 
-
-class WriteFile(object):
+class WriteFile(ABC):
     """docstring for WriteFile"""
     def __init__(self, arg):
         self.filename = arg
@@ -16,6 +16,9 @@ class WriteFile(object):
     def get_filehandle(self):
         return self.filehandle
 
+    def write(self):
+        return
+
 
 class DelimFile(WriteFile):
     """docstring for DelimFile"""
@@ -24,8 +27,22 @@ class DelimFile(WriteFile):
         self.delimiter = delim
 
     def write(self, text):
+        text = self.__wrap_delimiter(text)
         text = text.replace(' ', self.delimiter)
         self.filehandle.write("{}\n".format(text))
+
+    def __wrap_delimiter(self, arg_text):
+        # if current delimiter is present in input text,
+        # then wrap it with double quotes.
+        # simple split by (hard-coded) single space 
+        text_lst = list()
+        for word in arg_text.split(' '):
+            if self.delimiter not in word:
+                text_lst.append(word)
+            else:
+                text_lst.append("\"{}\"".format(word))
+
+        return ' '.join(map(str, text_lst))
 
 
 class LogFile(WriteFile):

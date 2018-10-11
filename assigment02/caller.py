@@ -9,6 +9,6 @@ lf.write('Llegaron bebe y bebita')
 
 # CSV file
 csv = DelimFile('file.csv', ',')
-csv.write('Oye! Manu')
-csv.write('Llegaron bebe y bebita')
+csv.write('Oye!, Manu')
+csv.write('Llegaron bebe ,y bebita')
 
