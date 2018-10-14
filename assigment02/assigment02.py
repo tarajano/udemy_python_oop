@@ -27,22 +27,26 @@ class DelimFile(WriteFile):
         self.delimiter = delim
 
     def write(self, text):
-        text = self.__wrap_delimiter(text)
-        text = text.replace(' ', self.delimiter)
-        self.filehandle.write("{}\n".format(text))
+        text_lst = self.__wrap_delimiter(text)
+        text_str = self.delimiter.join(text_lst)
+        self.filehandle.write("{}\n".format(text_str))
 
     def __wrap_delimiter(self, arg_text):
         # if current delimiter is present in input text,
         # then wrap it with double quotes.
-        # simple split by (hard-coded) single space 
         text_lst = list()
+        
         for word in arg_text.split(' '):
+            # simple split by (hard-coded) single space 
             if self.delimiter not in word:
                 text_lst.append(word)
             else:
-                text_lst.append("\"{}\"".format(word))
+                text_lst.append('"{}"'.format(word))
 
-        return ' '.join(map(str, text_lst))
+        # Ensuring eveything is a str object in the return list
+        text_lst = map(str, text_lst)
+
+        return text_lst
 
 
 class LogFile(WriteFile):
